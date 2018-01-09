@@ -1,0 +1,24 @@
+{
+  "name": "polling",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.17.1",
+    "material-ui": "^0.20.0",
+    "moment": "^2.20.1",
+    "react": "^16.2.0",
+    "react-dates": "^16.0.1",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.0.17",
+    "react-toastify": "^3.2.1",
+    "react-with-styles": "^2.3.1",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
