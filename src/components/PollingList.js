@@ -13,16 +13,15 @@ const PollingList = (props) => {
 
   return (
     <List selection divided verticalAlign="middle">
-      { renderPollingListItem(pollings) }
+      { renderPollingListItem(props, pollings) }
     </List>
   );
 }
 
-function renderPollingListItem(pollings) {
+function renderPollingListItem(props, pollings) {
   return (
     pollings.map(polling => {
-      console.log(polling.question)
-      return <PollingListItem key={polling.id} polling={polling}/>
+      return <PollingListItem key={polling.id} polling={polling} onPollingItemClicked={props.onPollingItemClicked}/>
     })
   ); 
 }

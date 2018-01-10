@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Container, Divider, Header, List, Table, Segment } from "semantic-ui-react";
 import http from "axios";
 import moment from "moment";
+import { toast } from "react-toastify";
 
 class PollingDetail extends Component {
   
@@ -14,22 +15,19 @@ class PollingDetail extends Component {
   componentWillMount(){
     http.get("http://localhost:9000/polling/" + this.props.match.params.id)
         .then((res) => {
-          console.log(res)
           const data = res.data.data
           this.setState({
             polling: data.polling,
             polling_user_answers: data.polling_user_answers
           })
-          console.log(this.state)
         })
         .catch((error) => {
-          console.log(error)
+          toast.error(error)
         })
   }
 
   renderPollingUserAnswerList(){
     return this.state.polling_user_answers.map((pua) => {
-      console.log(pua)
       return (
         <Table.Row key={pua.id}>
           <Table.Cell> {pua.username} </Table.Cell>
@@ -41,7 +39,6 @@ class PollingDetail extends Component {
 
   renderPollingDefinedAnswerList(){
     return this.state.polling.polling_defined_answers.map((pda) => {
-      console.log(pda)
       return(
         <List.Item key={pda.id}>
           { pda.answer }

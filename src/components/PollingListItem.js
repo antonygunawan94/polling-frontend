@@ -4,9 +4,14 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 
 class PollingListItem extends Component {
-  state = { 
-    startTimer: '',
-    endTimer: '',
+  
+  constructor(props){
+    super(props)
+    this.state = {
+      startTimer: '',
+      endTimer: '',
+    }
+    this.handleAnswerClick = this.handleAnswerClick.bind(this)
   }
 
   componentWillMount(){
@@ -48,32 +53,30 @@ class PollingListItem extends Component {
     this.renderTimeStatus()
   }
 
+  handleAnswerClick(){
+    this.props.onPollingItemClicked(this.props.polling)
+  }
+
   renderTimeStatus(){
     const polling = this.props.polling;
-
     
     const momentStartDate = moment(polling.start_date);
     const momentEndDate = moment(polling.expired_date);
     const momentNow = moment();
 
-    console.log(polling.question + ' ' +  momentNow + ' ' + momentStartDate + ' ' + momentEndDate)
-
     if (momentNow.isBefore(momentStartDate)) {
-      console.log(polling.question + ' is before')      
       return (
         <div>
           Starting { this.state.startTimer }
         </div>
       )
     } else if (momentNow.isBetween(momentStartDate, momentEndDate)) {
-      console.log(polling.question + ' is between')
       return(
         <div>
           Ending { this.state.endTimer }
         </div>
       )
     } else if (momentNow.isAfter(momentEndDate)) {
-      console.log(polling.question + ' ended')
       return (
         <div>
           Ended
@@ -86,9 +89,12 @@ class PollingListItem extends Component {
     const polling = this.props.polling;
 
     return (
-      <List.Item as={Link} to={"/polling/"+polling.id}>
+      <List.Item>
         <List.Content floated="right">
-          <Button as={Link} to={"/polling/answer"} secondary>Answer</Button>
+          <Button secondary onClick={this.handleAnswerClick}>Answer</Button>
+        </List.Content>
+        <List.Content floated="right">
+          <Button color="grey" as={Link} to={"/polling/" + polling.id}>Detail</Button>
         </List.Content>
         <List.Content floated="right">
           { this.renderTimeStatus() }

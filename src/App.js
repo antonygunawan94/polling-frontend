@@ -23,7 +23,7 @@ class App extends Component {
             <Route exact path="/" component={Home}/>
             <Route exact path="/polling/create" component={PollingCreate}/>
             <Route exact path="/polling/:id" component={PollingDetail}/>
-            <Route exact path="/polling/answer/:id" component={PollingAnswer}/>
+            <Route exact path="/polling/answer/:username/:id" component={PollingAnswer}/>
           </Switch>
         </Router>
         <ToastContainer />

@@ -27,8 +27,6 @@ class PollingCreate extends Component {
   handleFormSubmit(e){
     let question, room_id, startDate, endDate
     ({question, room_id, startDate, endDate } = this.state)
-    console.log(room_id)
-    console.log(this.state)
     if(!question){
       toast.error(`Polling question can't be empty`, {
         position: toast.POSITION.TOP_CENTER
@@ -69,8 +67,6 @@ class PollingCreate extends Component {
       'start_date': this.state.startDate.toISOString(),
       'expired_date': this.state.endDate.toISOString()
     }
-
-    console.log(JSON.stringify(polling))
 
     http.post("http://localhost:9000/polling", JSON.stringify(polling))
         .then((res) => { 
